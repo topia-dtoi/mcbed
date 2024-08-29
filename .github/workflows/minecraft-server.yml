@@ -1,0 +1,23 @@
+name: Minecraft Bedrock Server
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v2
+
+    - name: Start Minecraft Bedrock Server
+      run: |
+        docker run -d -p 19132:19132/udp itzg/minecraft-bedrock-server
+        
